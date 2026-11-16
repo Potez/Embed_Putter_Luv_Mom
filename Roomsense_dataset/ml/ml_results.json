@@ -1,0 +1,960 @@
+{
+ "windows": {
+  "train": 3186,
+  "test": 1062,
+  "pos_train": 0.6296296296296297,
+  "pos_test": 0.6195856873822976,
+  "per_day": {
+   "1": 1032,
+   "2": 1092,
+   "3": 1062
+  }
+ },
+ "model_compare_lodo": [
+  {
+   "model": "Majority (ทาย 0 เสมอ)",
+   "f1": 0.0,
+   "recall": 0.0,
+   "precision": 0.0,
+   "bacc": 0.5,
+   "tp": 0,
+   "fp": 0,
+   "fn": 2006,
+   "tn": 1180,
+   "on_while_empty_min": 0.0,
+   "dark_while_occupied_min": 334.3333,
+   "switches": 0,
+   "switches_true": 64
+  },
+  {
+   "model": "Rule: กล้องเห็นคนใน window นี้",
+   "f1": 0.9632,
+   "recall": 0.9327,
+   "precision": 0.9957,
+   "bacc": 0.963,
+   "tp": 1871,
+   "fp": 8,
+   "fn": 135,
+   "tn": 1172,
+   "on_while_empty_min": 1.3333,
+   "dark_while_occupied_min": 22.5,
+   "switches": 96,
+   "switches_true": 64
+  },
+  {
+   "model": "Rule: กล้องเห็นคนภายใน 1 นาที",
+   "f1": 0.9772,
+   "recall": 0.9955,
+   "precision": 0.9596,
+   "bacc": 0.9622,
+   "tp": 1997,
+   "fp": 84,
+   "fn": 9,
+   "tn": 1096,
+   "on_while_empty_min": 14.0,
+   "dark_while_occupied_min": 1.5,
+   "switches": 70,
+   "switches_true": 64
+  },
+  {
+   "model": "Logistic Regression",
+   "f1": 0.9745,
+   "recall": 0.9621,
+   "precision": 0.9872,
+   "bacc": 0.9705,
+   "tp": 1930,
+   "fp": 25,
+   "fn": 76,
+   "tn": 1155,
+   "on_while_empty_min": 4.1667,
+   "dark_while_occupied_min": 12.6667,
+   "switches": 74,
+   "switches_true": 64
+  },
+  {
+   "model": "Decision Tree (depth 4)",
+   "f1": 0.9872,
+   "recall": 0.9801,
+   "precision": 0.9944,
+   "bacc": 0.9854,
+   "tp": 1966,
+   "fp": 11,
+   "fn": 40,
+   "tn": 1169,
+   "on_while_empty_min": 1.8333,
+   "dark_while_occupied_min": 6.6667,
+   "switches": 78,
+   "switches_true": 64
+  },
+  {
+   "model": "Random Forest (50 ต้น, depth 8)",
+   "f1": 0.9862,
+   "recall": 0.9816,
+   "precision": 0.9909,
+   "bacc": 0.9832,
+   "tp": 1969,
+   "fp": 18,
+   "fn": 37,
+   "tn": 1162,
+   "on_while_empty_min": 3.0,
+   "dark_while_occupied_min": 6.1667,
+   "switches": 80,
+   "switches_true": 64
+  },
+  {
+   "model": "Gradient Boosting (HGB)",
+   "f1": 0.9815,
+   "recall": 0.9776,
+   "precision": 0.9854,
+   "bacc": 0.9765,
+   "tp": 1961,
+   "fp": 29,
+   "fn": 45,
+   "tn": 1151,
+   "on_while_empty_min": 4.8333,
+   "dark_while_occupied_min": 7.5,
+   "switches": 78,
+   "switches_true": 64
+  }
+ ],
+ "family_choice": {
+  "model": "Decision Tree (depth 4)",
+  "lodo_f1": 0.9872,
+  "best": 0.9872
+ },
+ "ablation": [
+  {
+   "set": "A กล้อง",
+   "n_features": 7,
+   "lodo_f1": 0.9862,
+   "lodo_recall": 0.9806,
+   "test_f1": 0.9755,
+   "test_recall": 1.0,
+   "test_precision": 0.9522
+  },
+  {
+   "set": "B กล้อง + ประตู",
+   "n_features": 12,
+   "lodo_f1": 0.9872,
+   "lodo_recall": 0.9801,
+   "test_f1": 0.9748,
+   "test_recall": 0.9985,
+   "test_precision": 0.9522
+  },
+  {
+   "set": "C = B + อุณหภูมิ/ความชื้น/MQ-2",
+   "n_features": 16,
+   "lodo_f1": 0.9802,
+   "lodo_recall": 0.985,
+   "test_f1": 0.9733,
+   "test_recall": 0.9985,
+   "test_precision": 0.9494
+  },
+  {
+   "set": "D = B + LDR",
+   "n_features": 13,
+   "lodo_f1": 0.9888,
+   "lodo_recall": 0.9895,
+   "test_f1": 0.9741,
+   "test_recall": 1.0,
+   "test_precision": 0.9495
+  }
+ ],
+ "set_choice": {
+  "set": "A กล้อง",
+  "features": [
+   "cam_max",
+   "cam_mean",
+   "cam_pos_frac",
+   "cam_missing_frac",
+   "cam_max_roll6",
+   "cam_mean_roll3",
+   "since_cam_s"
+  ]
+ },
+ "depth_grid": [
+  {
+   "max_depth": 2,
+   "f1": 0.9915,
+   "recall": 0.992,
+   "precision": 0.991,
+   "bacc": 0.9884,
+   "tp": 1990,
+   "fp": 18,
+   "fn": 16,
+   "tn": 1162,
+   "on_while_empty_min": 3.0,
+   "dark_while_occupied_min": 2.6667
+  },
+  {
+   "max_depth": 3,
+   "f1": 0.9857,
+   "recall": 0.9806,
+   "precision": 0.9909,
+   "bacc": 0.9827,
+   "tp": 1967,
+   "fp": 18,
+   "fn": 39,
+   "tn": 1162,
+   "on_while_empty_min": 3.0,
+   "dark_while_occupied_min": 6.5
+  },
+  {
+   "max_depth": 4,
+   "f1": 0.9862,
+   "recall": 0.9806,
+   "precision": 0.9919,
+   "bacc": 0.9835,
+   "tp": 1967,
+   "fp": 16,
+   "fn": 39,
+   "tn": 1164,
+   "on_while_empty_min": 2.6667,
+   "dark_while_occupied_min": 6.5
+  },
+  {
+   "max_depth": 5,
+   "f1": 0.9862,
+   "recall": 0.9806,
+   "precision": 0.9919,
+   "bacc": 0.9835,
+   "tp": 1967,
+   "fp": 16,
+   "fn": 39,
+   "tn": 1164,
+   "on_while_empty_min": 2.6667,
+   "dark_while_occupied_min": 6.5
+  },
+  {
+   "max_depth": 6,
+   "f1": 0.9862,
+   "recall": 0.9806,
+   "precision": 0.9919,
+   "bacc": 0.9835,
+   "tp": 1967,
+   "fp": 16,
+   "fn": 39,
+   "tn": 1164,
+   "on_while_empty_min": 2.6667,
+   "dark_while_occupied_min": 6.5
+  },
+  {
+   "max_depth": 8,
+   "f1": 0.9862,
+   "recall": 0.9806,
+   "precision": 0.9919,
+   "bacc": 0.9835,
+   "tp": 1967,
+   "fp": 16,
+   "fn": 39,
+   "tn": 1164,
+   "on_while_empty_min": 2.6667,
+   "dark_while_occupied_min": 6.5
+  }
+ ],
+ "depth_choice": 2,
+ "threshold": {
+  "value": 0.504,
+  "recall_target": 0.99,
+  "oof_at_thr": {
+   "f1": 0.9915,
+   "recall": 0.992,
+   "precision": 0.991,
+   "bacc": 0.9884,
+   "tp": 1990,
+   "fp": 18,
+   "fn": 16,
+   "tn": 1162,
+   "on_while_empty_min": 3.0,
+   "dark_while_occupied_min": 2.6667,
+   "switches": 76,
+   "switches_true": 64
+  },
+  "oof_at_05": {
+   "f1": 0.9915,
+   "recall": 0.992,
+   "precision": 0.991,
+   "bacc": 0.9884,
+   "tp": 1990,
+   "fp": 18,
+   "fn": 16,
+   "tn": 1162,
+   "on_while_empty_min": 3.0,
+   "dark_while_occupied_min": 2.6667,
+   "switches": 76,
+   "switches_true": 64
+  }
+ },
+ "errors_train_oof": [
+  {
+   "case": "grace 30 s หลังคนสุดท้ายออก",
+   "windows": 98,
+   "label1": 98,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ลืมปิดไฟ",
+   "windows": 50,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ลืมคีมในกล่อง (ห้องว่าง)",
+   "windows": 0,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": null
+  },
+  {
+   "case": "ลืมคีมในกล่อง (มีคน)",
+   "windows": 42,
+   "label1": 42,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ตุ๊กตาอยู่มุมอับ",
+   "windows": 686,
+   "label1": 685,
+   "fp": 1,
+   "fn": 16,
+   "acc": 0.9752
+  },
+  {
+   "case": "กล้องหลุด",
+   "windows": 4,
+   "label1": 4,
+   "fp": 0,
+   "fn": 1,
+   "acc": 0.75
+  },
+  {
+   "case": "กลุ่มถัดไปเข้าทันที",
+   "windows": 6,
+   "label1": 6,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "แวะสั้น",
+   "windows": 14,
+   "label1": 13,
+   "fp": 1,
+   "fn": 0,
+   "acc": 0.9286
+  },
+  {
+   "case": "ออกแล้วกลับเข้ามา",
+   "windows": 134,
+   "label1": 134,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "30 s แรกที่คนเข้า",
+   "windows": 132,
+   "label1": 126,
+   "fp": 6,
+   "fn": 0,
+   "acc": 0.9545
+  },
+  {
+   "case": "ทดสอบไฟ / alarm",
+   "windows": 39,
+   "label1": 34,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "มือในกล่องตอนห้องว่าง",
+   "windows": 13,
+   "label1": 7,
+   "fp": 5,
+   "fn": 0,
+   "acc": 0.6154
+  },
+  {
+   "case": "ปกติ: มีคน",
+   "windows": 976,
+   "label1": 976,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ปกติ: ห้องว่าง",
+   "windows": 1117,
+   "label1": 0,
+   "fp": 11,
+   "fn": 0,
+   "acc": 0.9902
+  }
+ ],
+ "errors_train_rule": [
+  {
+   "case": "grace 30 s หลังคนสุดท้ายออก",
+   "windows": 98,
+   "label1": 98,
+   "fp": 0,
+   "fn": 91,
+   "acc": 0.0714
+  },
+  {
+   "case": "ลืมปิดไฟ",
+   "windows": 50,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ลืมคีมในกล่อง (ห้องว่าง)",
+   "windows": 0,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": null
+  },
+  {
+   "case": "ลืมคีมในกล่อง (มีคน)",
+   "windows": 42,
+   "label1": 42,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ตุ๊กตาอยู่มุมอับ",
+   "windows": 686,
+   "label1": 685,
+   "fp": 1,
+   "fn": 44,
+   "acc": 0.9344
+  },
+  {
+   "case": "กล้องหลุด",
+   "windows": 4,
+   "label1": 4,
+   "fp": 0,
+   "fn": 4,
+   "acc": 0.0
+  },
+  {
+   "case": "กลุ่มถัดไปเข้าทันที",
+   "windows": 6,
+   "label1": 6,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "แวะสั้น",
+   "windows": 14,
+   "label1": 13,
+   "fp": 1,
+   "fn": 0,
+   "acc": 0.9286
+  },
+  {
+   "case": "ออกแล้วกลับเข้ามา",
+   "windows": 134,
+   "label1": 134,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "30 s แรกที่คนเข้า",
+   "windows": 132,
+   "label1": 126,
+   "fp": 6,
+   "fn": 3,
+   "acc": 0.9318
+  },
+  {
+   "case": "ทดสอบไฟ / alarm",
+   "windows": 39,
+   "label1": 34,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "มือในกล่องตอนห้องว่าง",
+   "windows": 13,
+   "label1": 7,
+   "fp": 5,
+   "fn": 1,
+   "acc": 0.5385
+  },
+  {
+   "case": "ปกติ: มีคน",
+   "windows": 976,
+   "label1": 976,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ปกติ: ห้องว่าง",
+   "windows": 1117,
+   "label1": 0,
+   "fp": 1,
+   "fn": 0,
+   "acc": 0.9991
+  }
+ ],
+ "test": {
+  "majority": {
+   "f1": 0.0,
+   "recall": 0.0,
+   "precision": 0.0,
+   "bacc": 0.5,
+   "tp": 0,
+   "fp": 0,
+   "fn": 658,
+   "tn": 404,
+   "on_while_empty_min": 0.0,
+   "dark_while_occupied_min": 109.6667,
+   "switches": 0,
+   "switches_true": 20
+  },
+  "rule_camera": {
+   "f1": 0.9492,
+   "recall": 0.9514,
+   "precision": 0.947,
+   "bacc": 0.9324,
+   "tp": 626,
+   "fp": 35,
+   "fn": 32,
+   "tn": 369,
+   "on_while_empty_min": 5.8333,
+   "dark_while_occupied_min": 5.3333,
+   "switches": 24,
+   "switches_true": 20
+  },
+  "rule_camera_1min": {
+   "f1": 0.9613,
+   "recall": 1.0,
+   "precision": 0.9255,
+   "bacc": 0.9344,
+   "tp": 658,
+   "fp": 53,
+   "fn": 0,
+   "tn": 351,
+   "on_while_empty_min": 8.8333,
+   "dark_while_occupied_min": 0.0,
+   "switches": 18,
+   "switches_true": 20
+  },
+  "final": {
+   "f1": 0.9741,
+   "recall": 1.0,
+   "precision": 0.9495,
+   "bacc": 0.9567,
+   "tp": 658,
+   "fp": 35,
+   "fn": 0,
+   "tn": 369,
+   "on_while_empty_min": 5.8333,
+   "dark_while_occupied_min": 0.0,
+   "switches": 18,
+   "switches_true": 20
+  },
+  "rf_same_features": {
+   "f1": 0.9748,
+   "recall": 1.0,
+   "precision": 0.9509,
+   "bacc": 0.9579,
+   "tp": 658,
+   "fp": 34,
+   "fn": 0,
+   "tn": 370,
+   "on_while_empty_min": 5.6667,
+   "dark_while_occupied_min": 0.0,
+   "switches": 18,
+   "switches_true": 20
+  }
+ },
+ "errors_test_final": [
+  {
+   "case": "grace 30 s หลังคนสุดท้ายออก",
+   "windows": 32,
+   "label1": 32,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ลืมปิดไฟ",
+   "windows": 14,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ลืมคีมในกล่อง (ห้องว่าง)",
+   "windows": 35,
+   "label1": 2,
+   "fp": 33,
+   "fn": 0,
+   "acc": 0.0571
+  },
+  {
+   "case": "ลืมคีมในกล่อง (มีคน)",
+   "windows": 19,
+   "label1": 19,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ตุ๊กตาอยู่มุมอับ",
+   "windows": 130,
+   "label1": 130,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "กล้องหลุด",
+   "windows": 3,
+   "label1": 3,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "กลุ่มถัดไปเข้าทันที",
+   "windows": 6,
+   "label1": 6,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "แวะสั้น",
+   "windows": 14,
+   "label1": 14,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ออกแล้วกลับเข้ามา",
+   "windows": 75,
+   "label1": 75,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "30 s แรกที่คนเข้า",
+   "windows": 44,
+   "label1": 42,
+   "fp": 2,
+   "fn": 0,
+   "acc": 0.9545
+  },
+  {
+   "case": "ทดสอบไฟ / alarm",
+   "windows": 31,
+   "label1": 14,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "มือในกล่องตอนห้องว่าง",
+   "windows": 3,
+   "label1": 1,
+   "fp": 2,
+   "fn": 0,
+   "acc": 0.3333
+  },
+  {
+   "case": "ปกติ: มีคน",
+   "windows": 389,
+   "label1": 389,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ปกติ: ห้องว่าง",
+   "windows": 338,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  }
+ ],
+ "errors_test_rule": [
+  {
+   "case": "grace 30 s หลังคนสุดท้ายออก",
+   "windows": 32,
+   "label1": 32,
+   "fp": 0,
+   "fn": 29,
+   "acc": 0.0938
+  },
+  {
+   "case": "ลืมปิดไฟ",
+   "windows": 14,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ลืมคีมในกล่อง (ห้องว่าง)",
+   "windows": 35,
+   "label1": 2,
+   "fp": 33,
+   "fn": 0,
+   "acc": 0.0571
+  },
+  {
+   "case": "ลืมคีมในกล่อง (มีคน)",
+   "windows": 19,
+   "label1": 19,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ตุ๊กตาอยู่มุมอับ",
+   "windows": 130,
+   "label1": 130,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "กล้องหลุด",
+   "windows": 3,
+   "label1": 3,
+   "fp": 0,
+   "fn": 3,
+   "acc": 0.0
+  },
+  {
+   "case": "กลุ่มถัดไปเข้าทันที",
+   "windows": 6,
+   "label1": 6,
+   "fp": 0,
+   "fn": 1,
+   "acc": 0.8333
+  },
+  {
+   "case": "แวะสั้น",
+   "windows": 14,
+   "label1": 14,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ออกแล้วกลับเข้ามา",
+   "windows": 75,
+   "label1": 75,
+   "fp": 0,
+   "fn": 3,
+   "acc": 0.96
+  },
+  {
+   "case": "30 s แรกที่คนเข้า",
+   "windows": 44,
+   "label1": 42,
+   "fp": 2,
+   "fn": 0,
+   "acc": 0.9545
+  },
+  {
+   "case": "ทดสอบไฟ / alarm",
+   "windows": 31,
+   "label1": 14,
+   "fp": 0,
+   "fn": 1,
+   "acc": 0.9677
+  },
+  {
+   "case": "มือในกล่องตอนห้องว่าง",
+   "windows": 3,
+   "label1": 1,
+   "fp": 2,
+   "fn": 0,
+   "acc": 0.3333
+  },
+  {
+   "case": "ปกติ: มีคน",
+   "windows": 389,
+   "label1": 389,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  },
+  {
+   "case": "ปกติ: ห้องว่าง",
+   "windows": 338,
+   "label1": 0,
+   "fp": 0,
+   "fn": 0,
+   "acc": 1.0
+  }
+ ],
+ "tree_text": "|--- since_cam_s <= 35.0\n|   |--- cam_mean_roll3 <= 0.1\n|   |   |--- class: 1\n|   |--- cam_mean_roll3 >  0.1\n|   |   |--- class: 1\n|--- since_cam_s >  35.0\n|   |--- since_cam_s <= 75.0\n|   |   |--- class: 0\n|   |--- since_cam_s >  75.0\n|   |   |--- class: 0\n",
+ "hysteresis": [
+  {
+   "k_off": 1,
+   "extra_hold_s": 0,
+   "f1": 0.9741,
+   "recall": 1.0,
+   "precision": 0.9495,
+   "bacc": 0.9567,
+   "tp": 658,
+   "fp": 35,
+   "fn": 0,
+   "tn": 369,
+   "on_while_empty_min": 5.8333,
+   "dark_while_occupied_min": 0.0,
+   "switches": 18,
+   "switches_true": 20
+  },
+  {
+   "k_off": 2,
+   "extra_hold_s": 10,
+   "f1": 0.9676,
+   "recall": 1.0,
+   "precision": 0.9373,
+   "bacc": 0.9455,
+   "tp": 658,
+   "fp": 44,
+   "fn": 0,
+   "tn": 360,
+   "on_while_empty_min": 7.3333,
+   "dark_while_occupied_min": 0.0,
+   "switches": 18,
+   "switches_true": 20
+  },
+  {
+   "k_off": 3,
+   "extra_hold_s": 20,
+   "f1": 0.9613,
+   "recall": 1.0,
+   "precision": 0.9255,
+   "bacc": 0.9344,
+   "tp": 658,
+   "fp": 53,
+   "fn": 0,
+   "tn": 351,
+   "on_while_empty_min": 8.8333,
+   "dark_while_occupied_min": 0.0,
+   "switches": 18,
+   "switches_true": 20
+  },
+  {
+   "k_off": 6,
+   "extra_hold_s": 50,
+   "f1": 0.9427,
+   "recall": 1.0,
+   "precision": 0.8916,
+   "bacc": 0.901,
+   "tp": 658,
+   "fp": 80,
+   "fn": 0,
+   "tn": 324,
+   "on_while_empty_min": 13.3333,
+   "dark_while_occupied_min": 0.0,
+   "switches": 18,
+   "switches_true": 20
+  }
+ ],
+ "perm_importance": [
+  {
+   "feature": "since_cam_s",
+   "mean": 0.341,
+   "std": 0.0098
+  },
+  {
+   "feature": "cam_max",
+   "mean": 0.0,
+   "std": 0.0
+  },
+  {
+   "feature": "cam_mean",
+   "mean": 0.0,
+   "std": 0.0
+  },
+  {
+   "feature": "cam_pos_frac",
+   "mean": 0.0,
+   "std": 0.0
+  },
+  {
+   "feature": "cam_missing_frac",
+   "mean": 0.0,
+   "std": 0.0
+  },
+  {
+   "feature": "cam_max_roll6",
+   "mean": 0.0,
+   "std": 0.0
+  },
+  {
+   "feature": "cam_mean_roll3",
+   "mean": 0.0,
+   "std": 0.0
+  }
+ ],
+ "tree_importance": [
+  {
+   "feature": "since_cam_s",
+   "value": 0.9918
+  },
+  {
+   "feature": "cam_mean_roll3",
+   "value": 0.0082
+  },
+  {
+   "feature": "cam_max",
+   "value": 0.0
+  },
+  {
+   "feature": "cam_mean",
+   "value": 0.0
+  },
+  {
+   "feature": "cam_pos_frac",
+   "value": 0.0
+  },
+  {
+   "feature": "cam_missing_frac",
+   "value": 0.0
+  },
+  {
+   "feature": "cam_max_roll6",
+   "value": 0.0
+  }
+ ],
+ "imputer_medians": {
+  "cam_max": 1.0,
+  "cam_mean": 1.0,
+  "cam_pos_frac": 0.95,
+  "cam_missing_frac": 0.0,
+  "cam_max_roll6": 2.0,
+  "cam_mean_roll3": 0.9833333333333334,
+  "since_cam_s": 0.0
+ },
+ "n_leaves": 4
+}
