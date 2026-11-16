@@ -1,0 +1,51 @@
+{
+  "rules": {
+    // Staff = any signed-in user. Gateway = uid listed in roles/gateway.
+    // The worker uses the Admin SDK and bypasses these rules.
+    ".read": "auth != null",
+    "roles": { ".read": "auth != null", ".write": false },
+
+    "room_list": { "$room": { ".write": "auth != null",
+                              ".validate": "newData.hasChildren(['name','capacity'])" } },
+
+    "rooms": {
+      "$room": {
+        "live":     { ".write": "root.child('roles/gateway/' + auth.uid).exists()" },
+        "readings": {
+          ".indexOn": ["ts"],
+          "$ts": { ".write": "root.child('roles/gateway/' + auth.uid).exists()",
+                   ".validate": "newData.hasChildren(['room_id','ts'])" }
+        },
+        "events":   { ".indexOn": ["ts"], "$id": { ".write": "auth != null && (root.child('roles/gateway/' + auth.uid).exists() || newData.child('type').val() == 'manual')" } }
+      }
+    },
+
+    "devices": { "$id": { ".write": "root.child('roles/gateway/' + auth.uid).exists()" } },
+
+    "control": {
+      "$room": {
+        ".write": "auth != null",
+        ".validate": "newData.child('cmd').isString() && newData.child('by').isString()"
+      }
+    },
+
+    "bookings": {
+      ".indexOn": ["start_ms", "end_ms", "room_id"],
+      "$id": {
+        ".write": "auth != null",
+        ".validate": "!newData.exists() || (newData.hasChildren(['room_id','booked_by','expected','start_ms','end_ms']) && newData.child('end_ms').val() > newData.child('start_ms').val())"
+      }
+    },
+
+    "alerts": {
+      ".indexOn": ["created_ms", "room_id"],
+      "$id": {
+        "ack_by": { ".write": "auth != null" },
+        "ack_ms": { ".write": "auth != null" }
+      }
+    },
+
+    "stats": { ".write": false },
+    "worker": { ".write": false }
+  }
+}

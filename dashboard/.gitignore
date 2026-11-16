@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.env.local
+deploy/certs/
+deploy/mosquitto/passwd
+*.pem
+*.key
+*.crt
+.DS_Store
+*-debug.log

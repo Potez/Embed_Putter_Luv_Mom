@@ -1,0 +1,22 @@
+{
+  "name": "@roomsense/worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx --env-file-if-exists=../.env src/index.ts",
+    "sim": "tsx --env-file-if-exists=../.env src/sim.ts",
+    "seed": "tsx --env-file-if-exists=../.env src/seed.ts",
+    "typecheck": "tsc --noEmit -p ."
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "@types/nodemailer": "^8.0.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@roomsense/shared": "*",
+    "firebase-admin": "^14.5.1",
+    "nodemailer": "^10.5.0"
+  }
+}
