@@ -1,0 +1,15 @@
+{
+  "name": "roomsense",
+  "private": true,
+  "workspaces": ["shared", "web", "worker"],
+  "scripts": {
+    "emulators": "firebase emulators:start --project demo-roomsense",
+    "dev": "npm -w web run dev",
+    "worker": "npm -w worker run start",
+    "sim": "npm -w worker run sim --",
+    "seed": "npm -w worker run seed --",
+    "build": "npm -w web run build",
+    "test": "npm -w shared test",
+    "typecheck": "npm -w shared run typecheck && npm -w worker run typecheck && npm -w web run typecheck"
+  }
+}
