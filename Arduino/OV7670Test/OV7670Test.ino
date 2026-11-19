@@ -23,7 +23,7 @@ void setup() {
 
   camera_config_t c = {};
   c.pin_pwdn = -1;   // tie PWDN to GND
-  c.pin_reset = -1;  // tie RESET to 3V3
+  c.pin_reset = 14;  // RST wired to GPIO14 (DevKit has only one 3V3 pin)
   c.pin_xclk = PIN_XCLK;
   c.pin_sccb_sda = PIN_SIOD;
   c.pin_sccb_scl = PIN_SIOC;
